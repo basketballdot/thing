@@ -70,12 +70,12 @@ def splitAllbinStr(binstr,submask,bigmask):
     #maxaddr
 
     #stepNum=int(dynbitNum)-1 #5
-    #mstep = int(stepNum) * '0' + '1' #000001  地址自增的二进制步长
+    #mstep = int(stepNum) * '0' + '1' #000001  地址自增的二进制步长,这里没有用到
 
-    endstr = int(interfacebitNum) * '0' #00
+    endstr = int(interfacebitNum) * '0' #00 主机地址位数
 
     subnetlist=[]
-    for i in range(int(SubNetCount)):
+    for i in range(int(SubNetCount)): #这里巧妙的用了子网个数来作为循环次数，而不是从开始值自增
         dynstr = str(dec2bin(i)).zfill(dynbitNum)
         allstr = prestr + dynstr + endstr
         bindata=bin2hex(allstr) 
@@ -86,8 +86,13 @@ def splitAllbinStr(binstr,submask,bigmask):
 
 if __name__ == '__main__': 
     # 2001:dc7:1000::/120 126
-    IP6BigNet = sys.argv[1] #2001:dc7:1000::/120 
-    IP6Subsuffix = sys.argv[2]  #126
+    IP6BigNet = sys.argv[1]  #2001:dc7:1000::/120 
+    IP6Subsuffix = sys.argv[2]  #126 
+    if len(sys.argv) > 2:
+        pass
+    else:  
+        print "输入合法的IPv6地址段以及掩码" 
+        sys.exit() 
 
     IP6BigAddr = IP6BigNet.split('/')[0]  #2001:dc7:1000:: 
     IP6Bigsuffix = IP6BigNet.split('/')[1]   #120
