@@ -85,7 +85,7 @@ def splitAllbinStr(binstr,submask,bigmask):
 
 
 if __name__ == '__main__': 
-    # 2001:dc7:1000::/120 126
+    # 2001:dc7:1000::/120 126 参考RFC5952
     IP6BigNet = sys.argv[1]  #2001:dc7:1000::/120 
     IP6Subsuffix = sys.argv[2]  #126 
     if len(sys.argv) > 2:
